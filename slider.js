@@ -23,6 +23,28 @@ function getPercentage(left, start, end) {
   return Math.round(clamp((left - start) / (end - start), 0, 1) * 100);
 }
 
+function getLiangStatus(percentage) {
+  const normalized = clamp(Number(percentage) || 0, 0, 100);
+
+  if (normalized < 25) {
+    return '梁神';
+  }
+
+  if (normalized < 50) {
+    return '梁圣';
+  }
+
+  if (normalized < 75) {
+    return '梁子';
+  }
+
+  return '牢梁';
+}
+
+function getStatusMessage(percentage, prefix = '当前祖率') {
+  return `${prefix}：${percentage}% · ${getLiangStatus(percentage)}`;
+}
+
 function preventNativeDrag(element) {
   element.draggable = false;
   element.addEventListener('dragstart', (event) => event.preventDefault());
@@ -49,7 +71,7 @@ function initSlider() {
     return stage.clientWidth / SLIDER_CONFIG.backgroundWidth;
   }
 
-  function updateVisual(left = SLIDER_CONFIG.start) {
+  function updateVisual(left = SLIDER_CONFIG.start, statusPrefix = '当前祖率') {
     const scale = getScale();
     const thumbWidth = thumb.naturalWidth * SLIDER_CONFIG.thumbScale;
     currentLeft = clamp(left, SLIDER_CONFIG.start, SLIDER_CONFIG.end);
@@ -60,7 +82,8 @@ function initSlider() {
     stage.style.setProperty('--thumb-top', `${SLIDER_CONFIG.thumbTop * scale}px`);
     stage.style.setProperty('--thumb-width', `${thumbWidth * scale}px`);
     thumb.setAttribute('aria-valuenow', String(percentage));
-    thumb.setAttribute('aria-valuetext', `${percentage}%`);
+    thumb.setAttribute('aria-valuetext', `${percentage}% · ${getLiangStatus(percentage)}`);
+    setStatus(getStatusMessage(percentage, statusPrefix));
   }
 
   function setStatus(message) {
@@ -84,9 +107,9 @@ function initSlider() {
     );
   }
 
-  function moveThumb(event) {
+  function moveThumb(event, statusPrefix = '正在调整祖率') {
     const left = getLeftFromPointer(event);
-    updateVisual(left);
+    updateVisual(left, statusPrefix);
   }
 
   thumb.addEventListener('pointerdown', (event) => {
@@ -95,7 +118,6 @@ function initSlider() {
     grabOffset = getPointerX(event) - currentLeft;
     thumb.setPointerCapture(event.pointerId);
     thumb.classList.add('is-dragging');
-    setStatus('正在调整阻值');
     moveThumb(event);
   });
 
@@ -115,7 +137,7 @@ function initSlider() {
       thumb.releasePointerCapture(event.pointerId);
     }
     thumb.classList.remove('is-dragging');
-    setStatus('拖动旋钮调整位置');
+    updateVisual(currentLeft);
   }
 
   thumb.addEventListener('pointerup', stopDragging);
@@ -159,6 +181,8 @@ if (typeof module !== 'undefined' && module.exports) {
     clamp,
     getPercentage,
     getThumbLeft,
+    getLiangStatus,
+    getStatusMessage,
     preventNativeDrag,
   };
 }

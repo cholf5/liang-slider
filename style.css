@@ -102,6 +102,14 @@ h1 {
   letter-spacing: 0.06em;
 }
 
+.disclaimer {
+  margin: 8px 0 0;
+  color: #b09b85;
+  font-family: Arial, "Microsoft YaHei", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
 @media (max-width: 560px) {
   .page-shell {
     justify-content: flex-start;

@@ -4,6 +4,8 @@ const {
   clamp,
   getPercentage,
   getThumbLeft,
+  getLiangStatus,
+  getStatusMessage,
   preventNativeDrag,
 } = require('./slider.js');
 
@@ -23,6 +25,20 @@ test('getPercentage 将旋钮位置转换为 0 到 100 的百分比', () => {
   assert.equal(getPercentage(40, 40, 300), 0);
   assert.equal(getPercentage(170, 40, 300), 50);
   assert.equal(getPercentage(300, 40, 300), 100);
+});
+
+test('getLiangStatus 将祖率映射到四种梁氏状态', () => {
+  assert.equal(getLiangStatus(0), '梁神');
+  assert.equal(getLiangStatus(25), '梁圣');
+  assert.equal(getLiangStatus(49), '梁圣');
+  assert.equal(getLiangStatus(50), '梁子');
+  assert.equal(getLiangStatus(74), '梁子');
+  assert.equal(getLiangStatus(75), '牢梁');
+  assert.equal(getLiangStatus(100), '牢梁');
+});
+
+test('getStatusMessage 生成包含祖率和梁氏状态的提示', () => {
+  assert.equal(getStatusMessage(42, '正在调整祖率'), '正在调整祖率：42% · 梁圣');
 });
 
 test('preventNativeDrag 禁止图片触发浏览器原生拖拽', () => {

@@ -1,0 +1,114 @@
+:root {
+  color: #2c241c;
+  background: #f2eadc;
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.68), transparent 42%),
+    #f2eadc;
+}
+
+.page-shell {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px 42px;
+  overflow: hidden;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: #9a7650;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+}
+
+h1 {
+  margin: 0;
+  color: #3b2b1d;
+  font-size: clamp(30px, 5vw, 48px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.intro {
+  margin: 12px 0 32px;
+  color: #806d5c;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+}
+
+.slider-stage {
+  position: relative;
+  width: min(528px, 92vw);
+  aspect-ratio: 528 / 472;
+  user-select: none;
+}
+
+.slider-background {
+  display: block;
+  width: 100%;
+  height: auto;
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+.slider-thumb {
+  position: absolute;
+  top: var(--thumb-top, 255px);
+  left: var(--thumb-left, 76px);
+  display: block;
+  width: var(--thumb-width, 75px);
+  height: auto;
+  touch-action: none;
+  -webkit-user-drag: none;
+  user-drag: none;
+  cursor: grab;
+  filter: drop-shadow(0 7px 5px rgba(63, 42, 25, 0.22));
+  transition: filter 160ms ease;
+}
+
+.slider-thumb:hover,
+.slider-thumb:focus-visible {
+  filter: drop-shadow(0 9px 7px rgba(63, 42, 25, 0.3));
+  outline: none;
+}
+
+.slider-thumb.is-dragging {
+  cursor: grabbing;
+  filter: drop-shadow(0 4px 3px rgba(63, 42, 25, 0.2));
+}
+
+.slider-status {
+  min-height: 1.5em;
+  margin: 18px 0 0;
+  color: #947b62;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 560px) {
+  .page-shell {
+    justify-content: flex-start;
+    padding-top: 14vh;
+  }
+
+  .intro {
+    margin-bottom: 20px;
+  }
+}

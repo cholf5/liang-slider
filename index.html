@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f2eadc" />
+    <title>滑动变阻器</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <p class="eyebrow">INTERACTIVE DEVICE</p>
+      <h1>滑动变阻器</h1>
+      <p class="intro">拖动旋钮，探索电阻滑动的范围</p>
+
+      <section
+        class="slider-stage"
+        data-slider-stage
+        aria-label="滑动变阻器控制区域"
+      >
+        <img
+          class="slider-background"
+          data-slider-background
+          src="./img/background.png"
+          alt="滑动变阻器"
+          draggable="false"
+        />
+        <img
+          class="slider-thumb"
+          data-slider-thumb
+          src="./img/thumb.png"
+          alt="滑动旋钮"
+          draggable="false"
+          role="slider"
+          tabindex="0"
+          aria-label="变阻器滑块"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-valuetext="0%"
+        />
+      </section>
+
+      <p class="slider-status" data-slider-status>拖动旋钮调整位置</p>
+    </main>
+
+    <script src="./slider.js"></script>
+  </body>
+</html>

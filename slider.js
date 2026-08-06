@@ -2,9 +2,9 @@ const SLIDER_CONFIG = {
   // 以下数值以 background.png 的原始尺寸为基准，便于直接手调。
   backgroundWidth: 528,
   start: 76,
-  end: 366,
-  thumbScale: 0.16,
-  thumbTop: 255,
+  end: 395,
+  thumbScale: 0.15,
+  thumbTop: 100,
 };
 
 function clamp(value, min, max) {

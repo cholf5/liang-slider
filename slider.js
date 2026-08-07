@@ -26,19 +26,23 @@ function getPercentage(left, start, end) {
 function getLiangStatus(percentage) {
   const normalized = clamp(Number(percentage) || 0, 0, 100);
 
-  if (normalized < 25) {
+  if (normalized < 20) {
     return '梁神';
   }
 
-  if (normalized < 50) {
+  if (normalized < 40) {
     return '梁圣';
   }
 
-  if (normalized < 75) {
+  if (normalized < 60) {
     return '梁子';
   }
 
-  return '牢梁';
+  if (normalized < 80) {
+    return '牢梁';
+  }
+
+  return '梁畜';
 }
 
 function getStatusMessage(percentage, prefix = '当前祖率') {
